@@ -1,7 +1,4 @@
 node_modules
-*.mp3
-*.wav
-*.ogg
 
 tempCodeRunnerFile.py
 env
