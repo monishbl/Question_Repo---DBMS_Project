@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/static/dist/css/output.css">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+
+
+    <script>
+        function handleActionChange() {
+            const action = document.getElementById('action').value;
+            const fields = ['question', 'answer', 'choice1', 'choice2', 'choice3', 'choice4'];
+            fields.forEach(field => {
+                document.getElementById(field).parentElement.style.display = (action === 'add' || action === 'modify') ? 'block' : 'none';
+            });
+
+            document.getElementById('qno').parentElement.style.display = 'block';
+
+            if (action === 'modify') {
+                const qno = document.getElementById('qno').value;
+                if (qno) {
+                    fetchQuestion(qno);
+                }
+            }
+        }
+
+        function fetchQuestion(qno) {
+            fetch(`/admin/question/${qno}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        document.getElementById('question').value = data.question;
+                        document.getElementById('answer').value = data.answer;
+                        document.getElementById('choice1').value = data.choice1;
+                        document.getElementById('choice2').value = data.choice2;
+                        document.getElementById('choice3').value = data.choice3;
+                        document.getElementById('choice4').value = data.choice4;
+                    } else {
+                        alert('Question not found!');
+                    }
+                });
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100" onload="handleActionChange()">
+    <div class="max-w-md mx-auto mt-10">
+        <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="action">
+                    Action
+                </label>
+                <select id="action" name="action" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    onchange="handleActionChange()">
+                    <option value="add">Add</option>
+                    <option value="remove">Remove</option>
+                    <option value="modify">Modify</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="qno">
+                    QNo
+                </label>
+                <input id="qno" name="qno" type="text"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    oninput="handleActionChange()">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="question">
+                    Question
+                </label>
+                <input id="question" name="question" type="text"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="answer">
+                    Answer
+                </label>
+                <input id="answer" name="answer" type="text"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="choice1">
+                    Choice 1
+                </label>
+                <input id="choice1" name="choice1" type="text"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="choice2">
+                    Choice 2
+                </label>
+                <input id="choice2" name="choice2" type="text"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="choice3">
+                    Choice 3
+                </label>
+                <input id="choice3" name="choice3" type="text"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="choice4">
+                    Choice 4
+                </label>
+                <input id="choice4" name="choice4" type="text"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="flex items-center justify-between">
+                <input type="submit" value="Submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

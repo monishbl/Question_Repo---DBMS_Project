@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/dist/css/output.css">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex flex-col items-center justify-center h-screen">
+    {% if error_message %}
+    <script>
+        alert("{{error_message}}");
+    </script>
+    {% endif %}
+    <div class="mb-8" id="login-forms">
+        <!-- Choose Login Form -->
+        <form id="choose-login-form" class="bg-white p-8 rounded-lg shadow-md">
+            <h2 class="text-center text-2xl mb-4">Choose Login</h2>
+            <div class="mb-4">
+                <label><input type="radio" name="login_type" value="user" required> User Login</label>
+            </div>
+            <div class="mb-4">
+                <label><input type="radio" name="login_type" value="admin" required> Admin Login</label>
+            </div>
+            <div>
+                <button type="button" onclick="showLoginForm()" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 cursor-pointer w-full">
+                    Proceed
+                </button>
+            </div>
+        </form>
+
+        <!-- Admin Login Form -->
+        <form id="admin-login-form" action="/admin_authenticate" method="post" class="bg-white p-8 rounded-lg shadow-md hidden">
+            <h2 class="text-center text-2xl mb-4">Admin Login</h2>
+            <div class="mb-4">
+                <input type="text" name="admin_username" placeholder="Admin Username"
+                    class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <input type="submit" value="Login" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 cursor-pointer w-full">
+            </div>
+        </form>
+
+        <!-- User Login Form -->
+        <form id="user-login-form" action="/user_login" method="post" class="bg-white p-8 rounded-lg shadow-md hidden">
+            <h2 class="text-center text-2xl mb-4">User Login</h2>
+            <div class="mb-4">
+                <input type="text" name="username" placeholder="Username" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <input type="submit" value="Login" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 cursor-pointer w-full">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function showLoginForm() {
+            var loginType = document.querySelector('input[name="login_type"]:checked').value;
+            if (loginType === 'admin') {
+                document.getElementById('choose-login-form').classList.add('hidden');
+                document.getElementById('admin-login-form').classList.remove('hidden');
+            } else if (loginType === 'user') {
+                document.getElementById('choose-login-form').classList.add('hidden');
+                document.getElementById('user-login-form').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+
+</html>

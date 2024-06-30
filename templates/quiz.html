@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview QA</title>
+    <link rel="stylesheet" href="/static/dist/css/output.css">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+
+
+</head>
+
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+    <div class="w-full max-w-xl bg-white rounded-lg shadow-md p-6 mt-4">
+        <h1 class="text-xl font-bold mb-4">Question {{qu_count}}</h1>
+        <p class="mb-4">{{data.question}}</p>
+        <form action="/quiz" method="post" class="space-y-4" id="quiz-form">
+            <input type="hidden" name="qno" value="{{data.qno}}">
+            <input type="hidden" name="count" value="{{count}}">
+            <div class="flex items-center">
+                <input type="radio" name="answer" value="0" class="mr-2"> <span>{{data.choice1}}</span>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" name="answer" value="1" class="mr-2"> <span>{{data.choice2}}</span>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" name="answer" value="2" class="mr-2"> <span>{{data.choice3}}</span>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" name="answer" value="3" class="mr-2"> <span>{{data.choice4}}</span>
+            </div>
+            <input type="submit" value="Submit" class="w-full py-2 px-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-600 cursor-pointer">
+        </form>
+    </div>
+
+</body>
+
+</html>
