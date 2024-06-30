@@ -30,7 +30,7 @@ This project is a web-based quiz application built with Flask and TailwindCSS. I
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/monishbl/DBMS_Projects/tree/4dc9463d3db3e910b08af322dd3d67444b36f588/Question_repo
+git clone https://github.com/monishbl/Question_Repo---DBMS_Project.git
 ```
 
 2. **Install dependencies**
